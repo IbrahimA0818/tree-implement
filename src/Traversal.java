@@ -10,7 +10,9 @@ public class Traversal {
     root.right.right = new TreeNode(5);
     root.right.right.right = new TreeNode(22);
 
-    printPreOrder(root);
+   //printPreOrder(root);
+   //printUnderThreshold(root, 7);
+   countNodes(root);
   }
 
   public static void printPreOrder(TreeNode current){
@@ -32,5 +34,24 @@ public class Traversal {
     printInOrder(current.left);
     System.out.println(current.value);
     printInOrder(current.right);
+  }
+
+ 
+
+  public static void printUnderThreshold(TreeNode current, int threshold){
+    if(current == null) return;
+    if (threshold > current.value){
+      System.out.println(current.value);
+    }
+    printUnderThreshold(current.left, threshold);
+    printUnderThreshold(current.right, threshold);
+  }
+  //returns how many nodes are in the tree
+  public static int countNodes(TreeNode current){
+    if(current == null) return 0;
+    int leftSubTreeCount = countNodes(current.left);
+    int rightSubTreeCount = countNodes(current.right);
+    int totalCount = leftSubTreeCount + rightSubTreeCount + 1;
+    return totalCount;  
   }
 }
